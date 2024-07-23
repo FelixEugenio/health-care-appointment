@@ -13,6 +13,8 @@ import { Control } from "react-hook-form";
 import { FormFieldtype } from "./forms/PatientForm";
 import { Label } from "@radix-ui/react-label";
 import React from "react";
+import 'react-phone-number-input/style.css'
+import PhoneInput from 'react-phone-number-input'
 
 interface CustomProps {
   control: Control<any>,
@@ -56,6 +58,21 @@ const RenderInput = ({ field, props }: { field: any, props: CustomProps }) => {
         </div>
       );
 
+      case FormFieldtype.PHONE_INPUT:
+        return(
+          <FormControl>
+            <PhoneInput
+            defaultCountry="PT"
+            placeholder={placeholder}
+            international
+            withCountryCallingCode
+            value={field.value as E164Number | undefined}
+            onChange={field.onChange}
+            className="input-phone"
+            />
+          </FormControl>
+        )
+    
     default:
       return null;
   }
